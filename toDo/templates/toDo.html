@@ -1,0 +1,17 @@
+{% extends 'layout/index.html' %} {% block content %} {% load static %} 
+{% if todo%}
+<section>
+  <h3 class="text-center">{{todo.title}}</h3>
+  <h4 class="text-center">{{todo.id}}</h4>
+  <p class="text-center">{{todo.description}}</p>
+  <p class="text-center">{{todo.date}}</p>
+  <p class="text-center">Priority: {{todo.priority}}</p>
+  <p class="text-center">Complete: {{todo.complete}}</p>
+  <p class="text-center">Category: {{todo.category.name}}</p>
+  <p class="text-center">List: {{todo.group.name}}</p>
+</section>
+{% else %}
+<div>
+  <p>There is no todo</p>
+</div>
+{% endif %} {% endblock %}

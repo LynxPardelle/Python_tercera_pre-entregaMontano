@@ -1,0 +1,45 @@
+<header class="bef bef-h-56px mb-3">
+  <nav
+    class="position-fixed top-0 start-0 w-100 navbar navbar-expand-lg bef bef-bg-moccasin bef-text-mystic px-2 bef-z-100"
+  >
+    <a class="navbar-brand fw-bold" href="/"
+      >Colorfull ToDos{% if name%}, {{ name }}{% endif %}</a
+    >
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navBarHeaderColorFullToDos"
+      aria-controls="navBarHeaderColorFullToDos"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navBarHeaderColorFullToDos">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" href="/">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/todo/lists">Todo Lists</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/todo/categories">Categories</a>
+        </li>
+        {% block admin %} {% if admin and admin == True %}
+        <li class="nav-item">
+          <a class="nav-link" href="/admin">Administration Panel</a>
+        </li>
+        {% endif %} 
+        {% endblock %} 
+        {% comment %} {% if logged_in %}
+        <li class="nav-item"><a class="nav-link" href="/logout">Logout</a></li>
+        {% else %}
+        <li class="nav-item"><a class="nav-link" href="/login">Login</a></li>
+        {% endif %} {% endcomment %}
+      </ul>
+    </div>
+  </nav>
+  <h2>Here you can create colorfull ToDos</h2>
+</header>

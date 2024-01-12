@@ -1,0 +1,49 @@
+{% extends 'layout/index.html' %} {% block content %} {% load static %}
+{% if list %}
+<section>
+  <h3 class="text-center text-capitalize">{{list.name}}</h3>
+  <h4 id="list_id" class="text-center">{{list.id}}</h4>
+  {% if list.todos %}
+  <ul class="list-group list-group-flush p-3 rounded">
+    {% for todo in list.todos %}
+    <li class="list-group-item text-center bef bef-bg-moccasin bef-text-mystic">
+      <a
+        class="text-capitalize text-center text-decoration-none"
+        href="/todo/todo/{{todo.id}}"
+      >
+        {{ todo.title }}
+      </a>
+    </li>
+    {% endfor %}
+  </ul>
+  {% else %}
+  <p class="text-center">No toDos yet</p>
+  {% endif %}
+</section>
+<section class="my-3 pb-5 mb-5">
+  <h3 class="text-center">Add a new toDo</h3>
+  <div class="p-3 rounded">
+    <div class="form-group my-3">{{form.as_p}}</div>
+    <div id="categories"></div>
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" value="false" id="completed" />
+      <label class="form-check-label" for="completed"> Completed </label>
+    </div>
+    <button
+      id="submit_button"
+      class="d-block mx-auto mt-3 mb-5 btn bef bef-btn-mediumspringgreen bef-text-mystic fw-bold"
+      disabled
+    >
+      Create New ToDo
+    </button>
+    <div id="form_message"></div>
+  </div>
+</section>
+{% block post_bef_scripts %}
+<script src="{% static '/js/list.js' %}"></script>
+{% endblock %}
+{% else %}
+<h3 class="text-center">No such list</h3>
+<h4 class="text-center">Go back to <a href="/todo/lists">lists</a></h4>
+{% endif %}
+{% endblock %} 

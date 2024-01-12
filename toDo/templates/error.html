@@ -1,0 +1,13 @@
+{% extends 'layout/index.html' %} {% block content %}
+<h3>
+  Error: {% if status and status != '' %}{{status}}{% else %}404{% endif %}
+</h3>
+<h4>
+  {% if statusMessage and statusMessage != '' %} {{statusMessage}} {% else %}
+  Page not found {% endif %}
+</h4>
+{% if message and message != '' %}
+<p>{{message}}</p>
+{% endif %}
+<p><a href="/">Go back to home</a></p>
+{% endblock %}

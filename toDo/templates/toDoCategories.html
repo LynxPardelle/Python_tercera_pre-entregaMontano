@@ -1,0 +1,40 @@
+{% extends 'layout/index.html' %} {% block content %} {% load static %}
+<section>
+  <h3 class="text-center">Categories</h3>
+  {% if categories %}
+  <ul class="list-group list-group-flush p-3 rounded">
+    {% for cat in categories %}
+    <li class="list-group-item text-center bef bef-bg-moccasin bef-text-mystic">
+      <a
+        class="text-capitalize text-center text-decoration-none"
+        href="/todo/category/{{cat.id}}"
+      >
+        {{ cat.name }}
+      </a>
+    </li>
+    {% endfor %}
+  </ul>
+  {% else %}
+  <div class="text-center p-3" role="alert">
+    <p>No Categories Found</p>
+  </div>
+  {% endif %}
+</section>
+<section class="my-3 pb-5 mb-5">
+  <h3 class="text-center">Create New Category</h3>
+  <div class="p-3 rounded">
+    <div class="form-group my-3">{{form.as_p}}</div>
+    <div id="colors"></div>
+    <button
+      id="submit_button"
+      class="d-block mx-auto mt-3 mb-5 btn bef bef-btn-mediumspringgreen bef-text-mystic fw-bold"
+      disabled
+    >
+      Create New Category
+    </button>
+    <div id="form_message"></div>
+  </div>
+</section>
+{% endblock %} {% block post_bef_scripts %}
+<script src="{% static '/js/categories.js' %}"></script>
+{% endblock %}
