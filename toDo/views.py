@@ -637,6 +637,69 @@ def show_toDo(request, id):
             'message': "Error: %s" % e})
 
 
+def search_lists(request):
+    errStatus = 500
+    try:
+        if request.method == "GET":
+            query = request.GET.get('search')
+            lists = list(ToDoList.objects.filter(
+                name__icontains=query).values())
+            if not lists or len(lists) == 0:
+                errStatus = 404
+                raise Exception("TodoLists not found")
+            return render(request, 'toDoLists.html', {'lists': lists, 'form': CreateNewList()})
+        else:
+            errStatus = 405
+            raise Exception("Method not allowed")
+    except Exception as e:
+        return render(request, 'error.html', {
+            'status': errStatus,
+            'statusMessage': 'Error',
+            'message': "Error: %s" % e})
+
+
+def search_categories(request):
+    errStatus = 500
+    try:
+        if request.method == "GET":
+            query = request.GET.get('search')
+            categories = list(ToDoCategory.objects.filter(
+                name__icontains=query).values())
+            if not categories or len(categories) == 0:
+                errStatus = 404
+                raise Exception("ToDoCategories not found")
+            return render(request, 'toDoCategories.html', {'categories': categories, 'form': CreateNewCategory()})
+        else:
+            errStatus = 405
+            raise Exception("Method not allowed")
+    except Exception as e:
+        return render(request, 'error.html', {
+            'status': errStatus,
+            'statusMessage': 'Error',
+            'message': "Error: %s" % e})
+
+
+def search_todos(request):
+    errStatus = 500
+    try:
+        if request.method == "GET":
+            query = request.GET.get('search')
+            todos = list(ToDo.objects.filter(
+                title__icontains=query).values())
+            if not todos or len(todos) == 0:
+                errStatus = 404
+                raise Exception("Todos not found")
+            todos = list(map(lambda todo: {**todo, 'category': ToDoCategory.objects.get(
+                id=todo['category_id']), 'group': {'id': todo['group_id'], 'name': ToDoList.objects.get(id=todo['group_id']).name}}, todos))
+            return render(request, 'toDos.html', {'todos': todos})
+        else:
+            errStatus = 405
+            raise Exception("Method not allowed")
+    except Exception as e:
+        return render(request, 'error.html', {
+            'status': errStatus,
+            'statusMessage': 'Error',
+            'message': "Error: %s" % e})
 # Update
 
 

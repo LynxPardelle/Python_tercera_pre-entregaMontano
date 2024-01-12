@@ -1,5 +1,26 @@
 {% extends 'layout/index.html' %} {% block content %} {% load static %}
 <section>
+  <form
+    action="/todo/search_categories"
+    method="GET"
+    class="form-inline my-3 p-3 d-flex flex-nowrap justify-content-evenly align-items-center"
+  >
+    <input
+      type="text"
+      name="search"
+      id="search"
+      class="form-control bef bef-bg-moccasin bef-text-mystic"
+      placeholder="Search Categories"
+    />
+    <button
+      type="submit"
+      class="btn btn-primary mx-2 bef bef-btn-mediumspringgreen bef-text-mystic"
+    >
+      Search
+    </button>
+  </form>
+</section>
+<section>
   <h3 class="text-center">Categories</h3>
   {% if categories %}
   <ul class="list-group list-group-flush p-3 rounded">

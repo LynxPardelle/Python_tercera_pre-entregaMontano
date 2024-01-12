@@ -20,6 +20,9 @@ urlpatterns = [
     path('list/<int:id>', views.show_list),
     path('category/<int:id>', views.show_category),
     path('todo/<int:id>', views.show_toDo),
+    path('search_lists', views.search_lists, name='search_lists'),
+    path('search_categories', views.search_categories, name='search_categories'),
+    path('search_todos', views.search_todos, name='search_todos'),
     # Update
     path('update_list/<str:name>/<str:newName>', views.update_list),
     path('update_category/<int:id>', views.update_category),
